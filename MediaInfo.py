@@ -136,11 +136,21 @@ class MediaInfo :
             fileSize    = re.search("File size\s*:\s*(\d+)\.?\d*\n",        generalInfo, re.S)
             duration    = re.search("Duration\s*:\s*(\d+)\.?\d*\n",         generalInfo, re.S)
             bitrate     = re.search("Overall bit rate\s*:\s*(\d+)\.?\d*\n", generalInfo, re.S)
+            applemake         = re.search("com.apple.quicktime.make\s*:\s*([\w\_\-\\\/\. ]+)\n", generalInfo, re.S)
+            applemodel        = re.search("com.apple.quicktime.model\s*:\s*([\w\_\-\\\/\. ]+)\n", generalInfo, re.S)
+            applesoftware     = re.search("com.apple.quicktime.software\s*:\s*([\w\_\-\\\/\. ]+)\n", generalInfo, re.S)
+            applecreationdate = re.search("com.apple.quicktime.creationdate\s*:\s*([\S\.]+)", generalInfo, re.S)
+            applesignature    = re.search("com.apple.photos.originating.signature\s*:\s*([\w\_\-\\\/\. ]+)\n", generalInfo, re.S)
 
             mediaInfo['container'] = container.group(1)
             mediaInfo['fileSize']  = fileSize.group(1)
             mediaInfo['duration']  = (str)((float)(duration.group(1))/1000)
             mediaInfo['bitrate']   = bitrate.group(1)
+            mediaInfo['applemake']         = applemake.group(1)
+            mediaInfo['applemodel']        = applemodel.group(1)
+            mediaInfo['applesoftware']     = applesoftware.group(1)
+            mediaInfo['applecreationdate'] = applecreationdate.group(1)
+            mediaInfo['applesignature']    = applesignature.group(1)
 
         video     = re.search("(\nVideo[\s\#\d]*\n.*?\n\n)", sourceString, re.S)
         if video :
